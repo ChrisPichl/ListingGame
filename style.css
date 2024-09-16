@@ -163,18 +163,12 @@ body {
 }
 
 
-#button-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  position: absolute;
-  bottom: 10px;
-}
+
 
 .random-button {
   width: 60px;
   height: 40px;
-  background-color: #ff5722;
+  background-color: #239506;
   border: none;
   color: white;
   font-size: 20px;
