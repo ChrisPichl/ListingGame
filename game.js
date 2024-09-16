@@ -1,4 +1,4 @@
-const frames = ['./assests/1.png', './assests/2.png', './assests/3.png', './assests/4.png', './assests/5.png', './assests/6.png'];
+const frames = ['./assests/1.webp', './assests/2.webp', './assests/3.webp', './assests/4.webp', './assests/5.webp', './assests/6.webp'];
 const startSound = new Audio('./assests/game.mp3');
 const frame3Sound = new Audio('./assests/in.mp3');
 const frame5Sound = new Audio('./assests/out.mp3');
