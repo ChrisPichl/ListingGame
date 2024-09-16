@@ -7,8 +7,7 @@ frame3Sound.playbackRate = 3.0;
 frame5Sound.playbackRate = 1.5;
 
 const animationFrame = document.getElementById('animation-frame');
-const randomButton1 = document.getElementById('random-button1');
-const randomButton2 = document.getElementById('random-button2');
+const randomButton = document.getElementById('random-button');
 const scoreDisplay = document.getElementById('score-display');
 const menuScreen = document.getElementById('menu-screen');
 const gameContainer = document.querySelector('.game-container');
@@ -16,28 +15,35 @@ const gameOverScreen = document.getElementById('game-over-screen');
 const highscoresScreen = document.getElementById('highscores-screen');
 const highscoresList = document.getElementById('highscores-list');
 
-let activeButton = null;
 let isAnimating = false;
+let shuffle = true;
 let score = 0;
 
-function assignButtonColors() {
-    if (isAnimating) return;
-    const randomChoice = Math.random();
-    if (randomChoice > 0.33) {
-        randomButton1.style.backgroundColor = 'green';
-        randomButton2.style.backgroundColor = 'grey';
-        activeButton = randomButton1;
-    } else {
-        randomButton1.style.backgroundColor = 'grey';
-        randomButton2.style.backgroundColor = 'green';
-        activeButton = randomButton2;
-    }
+// Array of possible button positions
+const buttonPositions = [
+    { top: '0%', left: '0%' },
+    { top: '0%', left: '25%' },
+    { top: '0%', left: '50%' },
+    { top: '0%', left: '75%' },
+    { top: '50%', left: '0%' },
+    { top: '50%', left: '25%' },
+    { top: '50%', left: '50%' },
+    { top: '50%', left: '75%' }
+];
+
+function assignButtonPosition() {
+    if (isAnimating && !shuffle) return;
+    const randomIndex = Math.floor(Math.random() * buttonPositions.length);
+    const position = buttonPositions[randomIndex];
+    randomButton.style.top = position.top;
+    randomButton.style.left = position.left;
 }
 
 function playAnimation() {
     isAnimating = true;
     let currentFrame = 0;
-    const frameDuration = 70; // Time between frames in milliseconds
+    const frameDuration = 80; // Time between frames in milliseconds
+    assignButtonPosition(); // Reassign button position after animation
 
     function animate() {
         animationFrame.src = frames[currentFrame];
@@ -53,18 +59,17 @@ function playAnimation() {
             isAnimating = false;
             score++;
             scoreDisplay.textContent = `Score: ${score}`;
-            assignButtonColors();
         }
     }
 
     setTimeout(animate, frameDuration); // Initial call with a delay
 }
 
-function handleButtonClick(button) {
-    if (button === activeButton && !isAnimating) {
-        button.style.transform = 'scale(1.1)';
+function handleButtonClick() {
+    if (!isAnimating) {
+        randomButton.style.transform = 'scale(1.1)';
         setTimeout(() => {
-            button.style.transform = 'scale(1)';
+            randomButton.style.transform = 'scale(1)';
         }, 150);
         playAnimation();
     }
@@ -73,7 +78,7 @@ function handleButtonClick(button) {
 document.getElementById('start-button').addEventListener('click', () => {
     menuScreen.style.display = 'none';
     gameContainer.style.display = 'flex';
-    assignButtonColors();
+    assignButtonPosition();
 });
 
 document.getElementById('highscores-button').addEventListener('click', () => {
@@ -94,6 +99,4 @@ document.getElementById('back-to-menu-button').addEventListener('click', () => {
     menuScreen.style.display = 'flex';
 });
 
-[randomButton1, randomButton2].forEach(button => {
-    button.addEventListener('click', () => handleButtonClick(button));
-});
+randomButton.addEventListener('click', handleButtonClick);
