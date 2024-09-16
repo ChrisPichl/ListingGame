@@ -3,109 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulsating Circle on Button Click</title>
-    <style>
-        .circle {
-            width: 100px;
-            height: 100px;
-            background: rgb(216,216,223);
-            background: radial-gradient(circle, rgba(216,216,223,1) 0%, rgba(169,169,183,1) 32%, rgba(62,64,64,1) 100%);
-            box-shadow: 0px 0px 115px 52px rgba(0,0,0,0.92);
--webkit-box-shadow: 0px 0px 115px 52px rgba(0,0,0,0.92);
--moz-box-shadow: 0px 0px 115px 52px rgba(0,0,0,0.92);
-            border-radius: 50%;
-            margin: 100px auto;
-            /* Center the circle horizontally */
-            transition: transform 0.5s ease-in-out;
-        }
-
-        
-        .pulsate {
-             
-            -webkit-animation: pulsate-bck 0.5s ease-in-out infinite both;
-                    animation: pulsate-bck 0.5s ease-in-out infinite both;
-        }
-
-        /* Animation definition */
-        @-webkit-keyframes pulsate-bck {
-            0% {
-                -webkit-transform: scale(1);
-                        transform: scale(1);
-            }
-            50% {
-                -webkit-transform: scale(0.8);
-                        transform: scale(0.8);
-            }
-            100% {
-                -webkit-transform: scale(1);
-                        transform: scale(1);
-            }
-        }
-
-        @keyframes pulsate-bck {
-            0% {
-                -webkit-transform: scale(1);
-                        transform: scale(1);
-            }
-            50% {
-                -webkit-transform: scale(0.8);
-                        transform: scale(0.8);
-            }
-            100% {
-                -webkit-transform: scale(1);
-                        transform: scale(1);
-            }
-        }
-
-        /* Button styling */
-        .button {
-            align-items: center;
-            justify-content: center;
-            display: inline-block;
-            margin: 10px;
-            width: 60px;
-            height: 60px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 16px;
-            line-height: 60px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .button:active {
-            transform: scale(0.8);
-        }
-        .button:disabled {
-opacity: 0.5;
-        }
-    </style>
+    <title>Frame-by-Frame Animation Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="circle"></div>
-    <button id="button1" class="button" onclick="startAnimation()">Clk</button>
-    <button id="button2" class="button" onclick="startAnimation()">Clk</button>
+    <div id="menu-screen">
+        <div id="menu-content">
+            <h1>Welcome to the Game</h1>
+            <button id="start-button" class="menu-button">Start</button>
+            <button id="highscores-button" class="menu-button">High Scores</button>
+            <button id="exit-button" class="menu-button">Exit</button>
+        </div>
+    </div>
 
-    <script>
-        function startAnimation() {
-            
-            const circle = document.querySelector('.circle');
-            const buttons = document.querySelectorAll('.button');
+    <div class="game-container" style="display: none;">
+        <div id="score-display">Score: 0</div>
+        <div id="animation-container">
+            <img id="animation-frame" src="./assests/1.png" alt="Animation Frame">
+        </div>
+        <div id="button-container">
+            <button id="random-button1" class="action-button">fist</button>
+            <button id="random-button2" class="action-button">fist</button>
+        </div>
+    </div>
 
-            // Disable both buttons
-            buttons.forEach(button => button.disabled = true);
+    <div id="game-over-screen">
+        <div id="game-over-content">
+            <h1>Game Over</h1>
+            <button id="restart-button">Restart</button>
+        </div>
+    </div>
 
-            // Add pulsate class to the circle
-            circle.classList.add('pulsate');
+    <div id="highscores-screen" style="display: none;">
+        <div id="highscores-content">
+            <h1>High Scores</h1>
+            <ul id="highscores-list"></ul>
+            <button id="back-to-menu-button" class="menu-button">Back to Menu</button>
+        </div>
+    </div>
 
-            // Remove pulsate class and re-enable buttons after the animation ends
-            setTimeout(() => {
-                circle.classList.remove('pulsate');
-                buttons.forEach(button => button.disabled = false);
-            }, 450); // Match the animation duration
-        }
-    </script>
+    <script src="game.js"></script>
 </body>
 </html>
