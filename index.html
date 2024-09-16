@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frame-by-Frame Animation Game</title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Preload key assests for faster loading -->
+    <link rel="preload" href="./assests/1.png" as="image">
+    <link rel="preload" href="./assests/2.png" as="image">
+    <link rel="preload" href="./assests/3.png" as="image">
+    <link rel="preload" href="./assests/4.png" as="image">
+    <link rel="preload" href="./assests/5.png" as="image">
+    <link rel="preload" href="./assests/6.png" as="image">
+    <link rel="preload" href="./assests/game.mp3" as="audio">
+    <link rel="preload" href="./assests/in.mp3" as="audio">
+    <link rel="preload" href="./assests/out.mp3" as="audio">
 </head>
 <body>
+    <!-- Menu Screen -->
     <div id="menu-screen">
         <div id="menu-content">
             <h1>Welcome to the Game</h1>
@@ -16,24 +28,27 @@
         </div>
     </div>
 
+    <!-- Game Container (hidden by default) -->
     <div class="game-container" style="display: none;">
         <div id="score-display">Score: 0</div>
         <div id="animation-container">
             <img id="animation-frame" src="./assests/1.png" alt="Animation Frame">
         </div>
         <div id="button-container">
-            <button id="random-button1" class="action-button">fist</button>
-            <button id="random-button2" class="action-button">fist</button>
+            <button id="random-button1" class="action-button">Click</button>
+            <button id="random-button2" class="action-button">Click</button>
         </div>
     </div>
 
-    <div id="game-over-screen">
+    <!-- Game Over Screen (hidden by default) -->
+    <div id="game-over-screen" style="display: none;">
         <div id="game-over-content">
             <h1>Game Over</h1>
             <button id="restart-button">Restart</button>
         </div>
     </div>
 
+    <!-- High Scores Screen (hidden by default) -->
     <div id="highscores-screen" style="display: none;">
         <div id="highscores-content">
             <h1>High Scores</h1>
@@ -42,6 +57,7 @@
         </div>
     </div>
 
+    <!-- Script loading at the end to ensure faster initial page rendering -->
     <script src="game.js"></script>
 </body>
 </html>
