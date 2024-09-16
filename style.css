@@ -144,6 +144,7 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: #34ee00;
+  z-index: 1;
 }
 
 #animation-container {
@@ -171,7 +172,6 @@ body {
 .action-button {
   width: 90px;
   height: 90px;
-  border-radius: 50%;
   background-color: #ff5722;
   border: none;
   color: white;

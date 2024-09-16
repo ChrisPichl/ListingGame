@@ -37,7 +37,7 @@ function assignButtonColors() {
 function playAnimation() {
     isAnimating = true;
     let currentFrame = 0;
-    const frameDuration = 100; // Time between frames in milliseconds
+    const frameDuration = 70; // Time between frames in milliseconds
 
     function animate() {
         animationFrame.src = frames[currentFrame];
