@@ -14,10 +14,11 @@ const gameContainer = document.querySelector('.game-container');
 const gameOverScreen = document.getElementById('game-over-screen');
 const highscoresScreen = document.getElementById('highscores-screen');
 const highscoresList = document.getElementById('highscores-list');
+const restartButton = document.getElementById('restart-button');
 
 let isAnimating = false;
-let shuffle = true;
 let score = 0;
+let lastClickTime = Date.now(); // Initialize lastClickTime
 
 // Array of possible button positions
 const buttonPositions = [
@@ -32,7 +33,6 @@ const buttonPositions = [
 ];
 
 function assignButtonPosition() {
-    if (isAnimating && !shuffle) return;
     const randomIndex = Math.floor(Math.random() * buttonPositions.length);
     const position = buttonPositions[randomIndex];
     randomButton.style.top = position.top;
@@ -66,20 +66,38 @@ function playAnimation() {
 }
 
 function handleButtonClick() {
+    const currentTime = Date.now();
     if (!isAnimating) {
         randomButton.style.transform = 'scale(1.1)';
         setTimeout(() => {
             randomButton.style.transform = 'scale(1)';
         }, 150);
         playAnimation();
+        lastClickTime = currentTime; // Update lastClickTime only when animation starts
     }
+}
+
+function gameLoop() {
+    const timeDifference = Date.now() - lastClickTime;
+
+    if (timeDifference > 3000) { // Game Over
+        gameOverScreen.style.display = 'flex';
+        gameContainer.style.display = 'none';
+        return; // Exit the loop
+    }
+console.log(timeDifference);
+
+    requestAnimationFrame(gameLoop);
 }
 
 document.getElementById('start-button').addEventListener('click', () => {
     menuScreen.style.display = 'none';
     gameContainer.style.display = 'flex';
+    lastClickTime = Date.now();  // Set the current time at the game start
     assignButtonPosition();
+    gameLoop();  // Start the game loop
 });
+
 
 document.getElementById('highscores-button').addEventListener('click', () => {
     menuScreen.style.display = 'none';
@@ -93,10 +111,20 @@ document.getElementById('highscores-button').addEventListener('click', () => {
     });
 });
 
-document.getElementById('exit-button').addEventListener('click', () => window.close());
 document.getElementById('back-to-menu-button').addEventListener('click', () => {
     highscoresScreen.style.display = 'none';
     menuScreen.style.display = 'flex';
 });
 
 randomButton.addEventListener('click', handleButtonClick);
+
+// Restart Button Logic
+restartButton.addEventListener('click', () => {
+    gameOverScreen.style.display = 'none';  // Hide the game over screen
+    menuScreen.style.display = 'flex';      // Show the menu screen
+    gameContainer.style.display = 'none';   // Hide the game container
+    lastClickTime = Date.now();             // Reset the lastClickTime to the current time
+    score = 0;                              // Reset score
+    scoreDisplay.textContent = `Score: ${score}`;
+    isAnimating = false;                    // Reset animation flag
+});

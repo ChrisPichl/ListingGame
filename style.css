@@ -163,18 +163,25 @@ body {
 }
 
 
-
+#button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+}
 
 .random-button {
   width: 60px;
   height: 40px;
-  background-color: #239506;
+  background-color: #1bab0b;
   border: none;
   color: white;
   font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
   position: absolute;
+  border-radius: 10px;
 
   transform: scale(1);
   transition: transform 0.2s;
@@ -198,7 +205,8 @@ body {
 /* Game Over screen */
 #game-over-screen {
   background-color: rgba(128, 128, 128, 0.8);
-  display: none;
+  display: flex;
+  z-index: 10;
 }
 
 #game-over-content {
