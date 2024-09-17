@@ -42,7 +42,7 @@ function assignButtonPosition() {
 function playAnimation() {
     isAnimating = true;
     let currentFrame = 0;
-    const frameDuration = 80; // Time between frames in milliseconds
+    const frameDuration = 100; // Time between frames in milliseconds
     assignButtonPosition(); // Reassign button position after animation
 
     function animate() {
