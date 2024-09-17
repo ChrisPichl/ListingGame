@@ -8,6 +8,7 @@ const frame5Sound = new Audio('./assests/out.mp3');
 frame3Sound.playbackRate = 3.0;
 frame5Sound.playbackRate = 1.5;
 startSound.volume = 0.3;
+startSound.loop = true; // Set this to true to loop the sound
 
 // Preload assets
 const preloadAssets = () => {
@@ -142,7 +143,7 @@ function gameLoop() {
         gameContainer.style.display = 'none';
         return;
     }
-
+    
     requestAnimationFrame(gameLoop);
 }
 
