@@ -44,16 +44,19 @@ let score = 0;
 let lastClickTime = Date.now();
 
 // Assign random button position
+const buttonMargin = 6; // 5px margin
+
 const buttonPositions = [
-    { top: '0%', left: '0%' },
-    { top: '0%', left: '25%' },
-    { top: '0%', left: '50%' },
-    { top: '0%', left: '75%' },
-    { top: '50%', left: '0%' },
-    { top: '50%', left: '25%' },
-    { top: '50%', left: '50%' },
-    { top: '50%', left: '75%' }
+    { top: '0%', left: `calc(0% + ${buttonMargin}px)` },
+    { top: '0%', left: `calc(25% + ${buttonMargin}px)` },
+    { top: '0%', left: `calc(50% + ${buttonMargin}px)` },
+    { top: '0%', left: `calc(75% + ${buttonMargin}px)` },
+    { top: '50%', left: `calc(0% + ${buttonMargin}px)` },
+    { top: '50%', left: `calc(25% + ${buttonMargin}px)` },
+    { top: '50%', left: `calc(50% + ${buttonMargin}px)` },
+    { top: '50%', left: `calc(75% + ${buttonMargin}px)` }
 ];
+
 
 let positionIndices = Array.from(buttonPositions.keys()); // [0, 1, 2, ..., 7]
 let currentIndex = 0;
