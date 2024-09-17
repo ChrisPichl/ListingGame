@@ -90,7 +90,7 @@ assignButtonPosition(); // Call this function whenever you need to assign a posi
 function playAnimation() {
     isAnimating = true;
     let currentFrame = 0;
-    const frameDuration = 80;
+    const frameDuration = 130;
     const totalFrames = frames.length;
     let startTime = null;
 
