@@ -33,10 +33,11 @@ body {
 
 #menu-content {
   text-align: center;
-  background: url("./assests/menu.jpg") center/cover no-repeat;
+  background: url("./assests/menu1.jpg") center/cover no-repeat;
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
 }
 
 #menu-content h1 {
