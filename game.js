@@ -54,11 +54,37 @@ const buttonPositions = [
     { top: '50%', left: '75%' }
 ];
 
+let positionIndices = Array.from(buttonPositions.keys()); // [0, 1, 2, ..., 7]
+let currentIndex = 0;
+
+// Shuffle function to randomize the positions array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+    return array;
+}
+
+// Shuffle the position indices array
+positionIndices = shuffleArray(positionIndices);
+
 function assignButtonPosition() {
-    const position = buttonPositions[Math.floor(Math.random() * buttonPositions.length)];
+    // Get the current position index
+    const positionIndex = positionIndices[currentIndex];
+    const position = buttonPositions[positionIndex];
+    
+    // Apply the new position
     randomButton.style.top = position.top;
     randomButton.style.left = position.left;
+    
+    // Update current index
+    currentIndex = (currentIndex + 1) % positionIndices.length;
 }
+
+// Example usage
+assignButtonPosition(); // Call this function whenever you need to assign a position
+
 
 // Play animation function
 function playAnimation() {
