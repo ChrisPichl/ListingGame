@@ -155,12 +155,13 @@ body {
   margin-bottom: 20px;
 }
 #animation-frame {
-  width: 100vw; /* Full width of the viewport */
-  height: 100vh; /* Full height of the viewport */
-  object-fit: cover; /* Ensures the aspect ratio is maintained and the image covers the frame */
-  position: absolute; /* Absolute positioning to cover the screen */
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
   top: 0;
   left: 0;
+  transition: opacity 0.1s ease-in-out; /* Smooth transition for opacity */
 }
 
 
@@ -249,4 +250,9 @@ body {
   .action-button {
     font-size: 14px;
   }
+}
+
+@keyframes titleAnimation {
+  0% { transform: translateY(-50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
