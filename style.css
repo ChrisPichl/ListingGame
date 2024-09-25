@@ -176,17 +176,20 @@ body {
 .random-button {
   width: 60px;
   height: 40px;
-  background-color: #1bab0b;
+  background-image: url("./assests/btn.png");
+  background-size: cover; /* Ensure the image fills the entire button */
+  background-position: center; /* Center the image within the button */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  object-fit: cover;
   border: none;
   color: white;
   font-size: 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
   position: absolute;
   border-radius: 10px;
 
   transform: scale(1);
-  transition: transform 0.2s;
+  transition: transform 0.2s, background-color 0.3s;
 }
 
 .button-container {
