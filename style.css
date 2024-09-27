@@ -116,11 +116,20 @@ body {
 }
 
 .menu-button {
-  background-color: #ff5722;
+background-image: url("./assests/nemubtn.png");
+background-size: cover; /* Ensure the image fills the entire button */
+background-position: center; /* Center the image within the button */
+background-repeat: no-repeat; /* Prevent the image from repeating */
+object-fit: cover;
+border: none;
+color: white;
+font-size: 20px;
+cursor: pointer;
+border-radius: 10px;
 }
 
 .menu-button:hover {
-  background-color: #e64a19;
+  background-color: #126f88;
 }
 
 /* Game container styles */
@@ -146,7 +155,7 @@ body {
   transform: translateX(-50%);
   font-size: 24px;
   font-weight: bold;
-  color: #34ee00;
+  color: white;
   z-index: 1;
 }
 
@@ -190,6 +199,7 @@ body {
 
   transform: scale(1);
   transition: transform 0.2s, background-color 0.3s;
+  z-index: 1;
 }
 
 .button-container {
@@ -202,9 +212,6 @@ body {
 }
 
 
-#action-button:active {
-  background-color: #e64a19;
-}
 
 
 /* Game Over screen */

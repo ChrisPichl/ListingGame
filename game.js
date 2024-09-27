@@ -94,24 +94,28 @@ assignButtonPosition(); // Call this function whenever you need to assign a posi
 function playAnimation() {
     isAnimating = true;
     let currentFrame = 0;
-    const frameDuration = 130;
+    const frameDuration = 100;
     const totalFrames = frames.length;
     let startTime = null;
 
-    assignButtonPosition(); // Reassign button position
-
+    
+    
     function animate(timestamp) {
         if (startTime === null) {
             startTime = timestamp;
         }
-
+        
         const elapsedTime = timestamp - startTime;
         const frameIndex = Math.floor(elapsedTime / frameDuration);
-
+        
         if (frameIndex >= totalFrames) {
             isAnimating = false;
             score++;
             scoreDisplay.textContent = `Score: ${score}`;
+            if(frameIndex == totalFrames)
+               { assignButtonPosition(); // Reassign button position
+                randomButton.style.zIndex = 1
+        }
             return;
         }
 
@@ -132,8 +136,7 @@ function playAnimation() {
 // Handle button click
 function handleButtonClick() {
     if (!isAnimating) {
-        randomButton.style.transform = 'scale(1.1)';
-        setTimeout(() => randomButton.style.transform = 'scale(1)', 150);
+        randomButton.style.zIndex = -1;
         playAnimation();
         lastClickTime = Date.now();
     }
@@ -142,6 +145,7 @@ function handleButtonClick() {
 // Game loop function
 function gameLoop() {
     if (Date.now() - lastClickTime > 3000) { // Game Over
+        startSound.pause();
         gameOverScreen.style.display = 'flex';
         gameContainer.style.display = 'none';
         return;
