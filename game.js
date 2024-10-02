@@ -41,7 +41,8 @@ const backToMenuButton = document.getElementById('back-to-menu-button');
 // Game State
 let isAnimating = false;
 let score = 0;
-let lastClickTime = Date.now();
+let lastClickTime = null; // Initialize as null to track after the first click
+let gameStarted = false; // Track if the game has started
 
 // Assign random button position
 const buttonMargin = 6; // 5px margin
@@ -94,12 +95,10 @@ assignButtonPosition(); // Call this function whenever you need to assign a posi
 function playAnimation() {
     isAnimating = true;
     let currentFrame = 0;
-    const frameDuration = 80;
+    const frameDuration = 70;
     const totalFrames = frames.length;
     let startTime = null;
 
-    
-    
     function animate(timestamp) {
         if (startTime === null) {
             startTime = timestamp;
@@ -112,10 +111,10 @@ function playAnimation() {
             isAnimating = false;
             score++;
             scoreDisplay.textContent = `Score: ${score}`;
-            if(frameIndex == totalFrames)
-               { assignButtonPosition(); // Reassign button position
-                randomButton.style.zIndex = 1
-        }
+            if(frameIndex == totalFrames) {
+                assignButtonPosition(); // Reassign button position
+                randomButton.style.zIndex = 1;
+            }
             return;
         }
 
@@ -138,13 +137,20 @@ function handleButtonClick() {
     if (!isAnimating) {
         randomButton.style.zIndex = -1;
         playAnimation();
-        lastClickTime = Date.now();
+
+        // Start tracking the timer after the first click
+        if (!gameStarted) {
+            lastClickTime = Date.now(); // Start the timer
+            gameStarted = true; // Mark the game as started
+        } else {
+            lastClickTime = Date.now(); // Reset the timer on subsequent clicks
+        }
     }
 }
 
 // Game loop function
 function gameLoop() {
-    if (Date.now() - lastClickTime > 3000) { // Game Over
+    if (gameStarted && Date.now() - lastClickTime > 500) { // Game Over only after the game starts
         startSound.pause();
         gameOverScreen.style.display = 'flex';
         gameContainer.style.display = 'none';
@@ -158,7 +164,6 @@ function gameLoop() {
 startButton.addEventListener('click', () => {
     menuScreen.style.display = 'none';
     gameContainer.style.display = 'flex';
-    lastClickTime = Date.now();
     assignButtonPosition();
     gameLoop();
     startSound.play();
@@ -187,8 +192,8 @@ restartButton.addEventListener('click', () => {
     gameOverScreen.style.display = 'none';
     menuScreen.style.display = 'flex';
     gameContainer.style.display = 'none';
-    lastClickTime = Date.now();
     score = 0;
     scoreDisplay.textContent = `Score: ${score}`;
     isAnimating = false;
+    gameStarted = false; // Reset game started state
 });
